@@ -15,6 +15,8 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using WebApplication1.Repositories;
+using System.Reflection;
+using System.IO;
 
 namespace WebApplication1
 {
@@ -35,6 +37,11 @@ namespace WebApplication1
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApplication1", Version = "v1" });
+
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
             });
 
             services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("AppDbContextInMemory"));
