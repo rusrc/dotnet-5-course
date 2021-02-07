@@ -76,13 +76,14 @@ namespace WebApplication1.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Put([FromBody] Product product)
         {
-            var isProductExists = (await _context.Products.FindAsync(product.Id) != null);
-            if (!isProductExists)
+            var currentProduct = await _context.Products.FindAsync(product.Id);
+            if (currentProduct == null)
             {
                 return NotFound();
             }
 
-            _context.Products.Update(product);
+            currentProduct.Name = product.Name;
+
             await _context.SaveChangesAsync();
 
             return Ok();
