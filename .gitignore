@@ -277,3 +277,5 @@ pub/
 src/**/app.yaml
 src/**/inf.yaml
 
+/WebApplication1/WebApplication1/Properties/ServiceDependencies/kursoft-test-api - Web Deploy
+/WebApplication1/WebApplication1/Properties
