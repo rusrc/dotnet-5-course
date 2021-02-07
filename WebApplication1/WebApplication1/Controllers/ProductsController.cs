@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNet.OData;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 using System.Collections.Generic;
@@ -30,9 +32,16 @@ namespace WebApplication1.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public IEnumerable<Product> Get()
+        [EnableQuery]
+        public IEnumerable<Product> GetProducts()
         {
-            return this._context.Products;
+            /*
+             https://docs.microsoft.com/ru-ru/aspnet/core/web-api/action-return-types?view=aspnetcore-5.0#return-ienumerablet-or-iasyncenumerablet
+             In ASP.NET Core 2.2 and earlier, returning IEnumerable<T> from an action 
+             results in synchronous collection iteration by the serializer. 
+             The result is the blocking of calls and a potential for thread pool starvation
+            */
+            return this._context.Products; // ToListAsync() 
         }
 
         // GET api/<ProductsController>/5
@@ -63,7 +72,7 @@ namespace WebApplication1.Controllers
         /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public async Task<ActionResult<Product>> Post([FromBody] Product product)
+        public async Task<ActionResult<Product>> PostOrder([FromBody] Product product)
         {
             this._context.Products.Add(product);
             await this._context.SaveChangesAsync();
@@ -74,7 +83,7 @@ namespace WebApplication1.Controllers
         // PUT api/<ProductsController>/5
         [HttpPut()]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> Put([FromBody] Product product)
+        public async Task<IActionResult> PutOrder([FromBody] Product product)
         {
             var currentProduct = await _context.Products.FindAsync(product.Id);
             if (currentProduct == null)
@@ -92,7 +101,7 @@ namespace WebApplication1.Controllers
         // DELETE api/<ProductsController>/5
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> DeleteOrder(int id)
         {
             var product = await this._context.Products.FindAsync(id);
             if (product == null)
