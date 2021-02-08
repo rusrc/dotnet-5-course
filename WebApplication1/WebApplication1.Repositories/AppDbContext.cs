@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-using System.Collections.Generic;
-
 using WebApplication1.Domain;
 
 namespace WebApplication1.Repositories
@@ -26,7 +24,6 @@ namespace WebApplication1.Repositories
                         x => x.HasOne<Order>().WithMany().HasForeignKey(x => x.OrderId),
                         x => x.HasOne<Product>().WithMany().HasForeignKey(x => x.ProductId)
                     );
-                    // .HasKey(x => new { x.ProductId, x.OrderId });
         }
     }
 }

@@ -56,7 +56,12 @@ namespace WebApplication1
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApplication1", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "WebApplication1",
+                    Version = "v1",
+                    Description = "my awesome description here"
+                });
 
                 // Set the comments path for the Swagger JSON and UI.
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
@@ -83,7 +88,7 @@ namespace WebApplication1
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
-            {             
+            {
                 endpoints.MapControllers();
                 // OData start
 
