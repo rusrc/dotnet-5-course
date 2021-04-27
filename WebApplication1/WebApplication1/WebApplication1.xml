@@ -4,11 +4,24 @@
         <name>WebApplication1</name>
     </assembly>
     <members>
+        <member name="M:WebApplication1.Controllers.ProductsController.GetProducts">
+            <summary>
+            Список продуктов
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:WebApplication1.Controllers.ProductsController.GetById(System.Int32)">
             <summary>
             Получаем продукт по id
             </summary>
             <param name="id">id продукта</param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApplication1.Controllers.ProductsController.PostOrder(WebApplication1.Domain.Product)">
+            <summary>
+            Создаем продукт
+            </summary>
+            <param name="product">Продукт</param>
             <returns></returns>
         </member>
     </members>
