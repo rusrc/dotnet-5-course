@@ -26,12 +26,19 @@ namespace WebApplication1.Controllers
         // GET: api/Orders
         [HttpGet]
         [EnableQuery]
-        public async Task<ActionResult<IQueryable<Order>>> GetOrders()
+        public async Task<ActionResult<IEnumerable<Order>>> GetOrders()
         {
-            return _context.Orders;
-                // .Include(x => x.Products)
-                // .ToListAsync();
+            return await _context.Orders
+                 // .Include(x => x.Products)
+                 .ToListAsync();
         }
+
+        //public async Task<ActionResult<IQueryable<Order>>> GetOrders()
+        //{
+        //    return _context.Orders;
+        //    // .Include(x => x.Products)
+        //    // .ToListAsync();
+        //}
 
         // GET: api/Orders/5
         [HttpGet("{id}")]
