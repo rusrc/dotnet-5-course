@@ -101,8 +101,9 @@ namespace WebApplication1
                 endpoints
                     .Select()
                     .OrderBy()
-                    .Filter()
-                    .Expand();
+                    .Filter()   
+                    .Expand()
+                    .MaxTop(100);
                 // OData end
             });
         }
