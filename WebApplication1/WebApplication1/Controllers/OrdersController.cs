@@ -25,20 +25,21 @@ namespace WebApplication1.Controllers
 
         // GET: api/Orders
         [HttpGet]
-        [EnableQuery]
-        public async Task<ActionResult<IEnumerable<Order>>> GetOrders()
+        [EnableQuery()]
+        public async Task<ActionResult<IEnumerable<Order>>> GetOrders2()
         {
             return await _context.Orders
                  // .Include(x => x.Products)
                  .ToListAsync();
         }
 
-        //public async Task<ActionResult<IQueryable<Order>>> GetOrders()
-        //{
-        //    return _context.Orders;
-        //    // .Include(x => x.Products)
-        //    // .ToListAsync();
-        //}
+        // GET: api/Orders2
+        [HttpGet("/api/Orders2")]
+        [EnableQuery(PageSize = 3)]
+        public async Task<ActionResult<IQueryable<Order>>> GetOrders()
+        {
+            return _context.Orders;
+        }
 
         // GET: api/Orders/5
         [HttpGet("{id}")]
